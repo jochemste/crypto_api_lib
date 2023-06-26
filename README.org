@@ -1,0 +1,52 @@
+#+title: CPP Crypto API Lib
+#+author: J. Stevense
+
+* CPP Crypto API Lib
+
+Note that this library is currently under development and not ready to use.
+
+** Design
+
+#+name: classdiagram
+#+begin_src plantuml :file docs/images/classdiagram.png
+  interface ICryptoAPI {
+          + ICryptoAPI(conf: Config)
+  }
+
+  interface IBackendFactory {
+          + get_backend(backend: string): IBackend
+  }
+
+  interface API::IBackend {
+  }
+
+  class CryptoAPI {
+  }
+
+  class API::BitvavoBackend {
+  }
+
+  class BackendFactory {
+          + get_backend(backend: string): IBackend
+  }
+
+  class Config {
+          + read_from_file(filename: string)
+          + get_config()
+          - backend: string
+  }
+
+  /'
+   ' Interface implementation relations
+   '/
+  CryptoAPI ..|> ICryptoAPI: Implements
+  API::BitvavoBackend ..|> API::IBackend: Implements
+  BackendFactory ..|> IBackendFactory: Implements
+
+  /'
+   ' Uses relations
+   '/
+  ICryptoAPI *-- Config: Uses
+#+end_src
+#+results: classdiagram
+[[file:docs/images/classdiagram.png]]
