@@ -20,6 +20,10 @@ Note that this library is currently under development and not ready to use.
   interface API::IBackend {
   }
 
+  interface Boost::Beast {
+
+  }
+
   class CryptoAPI {
   }
 
@@ -36,6 +40,10 @@ Note that this library is currently under development and not ready to use.
           - backend: string
   }
 
+  class HTTPHandler {
+
+  }
+
   /'
    ' Interface implementation relations
    '/
@@ -47,6 +55,7 @@ Note that this library is currently under development and not ready to use.
    ' Uses relations
    '/
   ICryptoAPI *-- Config: Uses
+  HTTPHandler *-- Boost::Beast: Uses
 #+end_src
 #+results: classdiagram
 [[file:docs/images/classdiagram.png]]

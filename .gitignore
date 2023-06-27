@@ -3,3 +3,5 @@ build/
 *.bin
 *.o
 *.out
+
+.ccls-cache/
