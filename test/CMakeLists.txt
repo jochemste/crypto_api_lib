@@ -9,13 +9,13 @@ include(FetchContent)
 
 enable_testing()
 # Define the test executable
-add_executable(test_my_library test_my_library.cpp)
+add_executable(test_crypto_api test_crypto_api.cpp)
 
 # Link the test executable to the library
 target_link_libraries(
-  test_my_library
-  my_library
+  test_crypto_api
+  crypto_api
   GTest::gtest_main)
 
 include(GoogleTest)
-gtest_discover_tests(test_my_library)
+gtest_discover_tests(test_crypto_api)

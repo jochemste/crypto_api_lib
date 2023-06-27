@@ -2,13 +2,14 @@ cmake_minimum_required(VERSION 3.10)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_FLAGS -Wall -Wextra)
+set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 
 # Project name and version
 project(crypto_api VERSION 0.1.0)
 
 option(BuildTest "BuildTest" OFF)
 option(BuildExample "BuildExample" OFF)
+set(CMAKE_POLICY_DEFAULT_CMP0135 NEW)
 
 # Add the include directory to the build
 message("Adding the include directory")
