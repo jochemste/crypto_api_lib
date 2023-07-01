@@ -1,5 +1,8 @@
+#include "crypto_api.hpp"
+
 #include <boost/beast/websocket.hpp>
+#include <iostream>
 
 namespace beast = boost::beast;
 
-int main(int argc, char **argv) { return 0; }
+DoSomething::DoSomething() { std::cout << "testing\n"; };

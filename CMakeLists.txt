@@ -4,8 +4,10 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 
+set(PROJECT_NAME crypto_api)
+
 # Project name and version
-project(crypto_api VERSION 0.1.0)
+project(${PROJECT_NAME} VERSION 0.1.0 LANGUAGES CXX)
 
 option(BuildTest "BuildTest" OFF)
 option(BuildExample "BuildExample" OFF)
@@ -38,4 +40,4 @@ endif()
 
 # Install the headers and library
 install(DIRECTORY include/ DESTINATION include)
-install(TARGETS crypto_api DESTINATION lib)
+install(TARGETS ${PROJECT_NAME} DESTINATION lib)

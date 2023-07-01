@@ -1,3 +1,4 @@
+
 include(FetchContent)
   FetchContent_Declare(
     googletest
@@ -8,14 +9,30 @@ include(FetchContent)
   FetchContent_MakeAvailable(googletest)
 
 enable_testing()
-# Define the test executable
-add_executable(test_crypto_api test_crypto_api.cpp)
 
-# Link the test executable to the library
+# Define test executable
+add_executable(
+  test_crypto_api
+  test_crypto_api.cpp
+  )
+
+# Link test executable to the library
 target_link_libraries(
   test_crypto_api
   crypto_api
   GTest::gtest_main)
 
+# Define test executable
+add_executable(
+  test_certhandler
+  test_certhandler.cpp)
+
+# Link test executable to the library
+target_link_libraries(
+  test_certhandler
+  certhandler
+  GTest::gtest_main)
+
+
 include(GoogleTest)
-gtest_discover_tests(test_crypto_api)
+gtest_discover_tests(test_crypto_api test_certhandler)
