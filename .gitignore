@@ -4,4 +4,7 @@ build/
 *.o
 *.out
 
-.ccls-cache/
+*.ccls-cache/
+GPATH
+GRTAGS
+GTAGS

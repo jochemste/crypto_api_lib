@@ -7,17 +7,21 @@ Note that this library is currently under development and not ready to use.
 
 ** Design
 
+
 #+name: classdiagram
 #+begin_src plantuml :file docs/images/classdiagram.png
+  set separator ::
+
   interface ICryptoAPI {
           + ICryptoAPI(conf: Config)
   }
 
-  interface IBackendFactory {
-          + get_backend(backend: string): IBackend
+  interface IHTTPHandler {
+
   }
 
-  interface API::IBackend {
+  interface IWebSocketHandler {
+
   }
 
   interface Boost::Beast {
@@ -27,11 +31,26 @@ Note that this library is currently under development and not ready to use.
   class CryptoAPI {
   }
 
-  class API::BitvavoBackend {
-  }
+  namespace Backend {
 
-  class BackendFactory {
-          + get_backend(backend: string): IBackend
+
+          interface IBackendFactory {
+                  + get_backend(backend: string): IBackend
+          }
+
+          interface IBackend {
+          }
+
+          class BitvavoBackend {
+          }
+
+          class BackendFactory {
+                  + get_backend(backend: string): IBackend
+          }
+
+          BitvavoBackend ..|> IBackend: Implements
+          BackendFactory ..|> IBackendFactory: Implements
+
   }
 
   class Config {
@@ -44,18 +63,54 @@ Note that this library is currently under development and not ready to use.
 
   }
 
+  class WebSocketHandler {
+
+  }
+
+
+
+  namespace Cert {
+
+          interface ICertHandler {
+                  + get_ca_certificates(std::string&)
+                  + load_ca_certificates()
+          }
+
+          class CertHandlerLinux {
+                  + get_ca_certificates(std::string&)
+                  + load_ca_certificates()
+                  - std::string filename
+          }
+
+          class CertHandlerFactory {
+                  + get_certhandler()
+          }
+
+          CertHandlerLinux ..|> ICertHandler: Implements
+          CertHandlerFactory *-- CertHandlerLinux: Uses
+  }
+
   /'
    ' Interface implementation relations
    '/
   CryptoAPI ..|> ICryptoAPI: Implements
-  API::BitvavoBackend ..|> API::IBackend: Implements
-  BackendFactory ..|> IBackendFactory: Implements
+  HTTPHandler ..|> IHTTPHandler: Implements
+  WebSocketHandler ..|> IWebSocketHandler: Implements
 
   /'
    ' Uses relations
    '/
   ICryptoAPI *-- Config: Uses
   HTTPHandler *-- Boost::Beast: Uses
+  WebSocketHandler *-- Boost::Beast: Uses
+  Backend::BitvavoBackend *-- IHTTPHandler: has a
+  Backend::BitvavoBackend *-- IWebSocketHandler: has a
+  Backend::BackendFactory *-- Backend::BitvavoBackend: Uses
+  ICryptoAPI *-- Backend::IBackend: Uses
+  WebSocketHandler *-- Cert::ICertHandler: has a
+  HTTPHandler *-- Cert::ICertHandler: has a
+  WebSocketHandler *-- Cert::CertHandlerFactory: Uses
+  HTTPHandler *-- Cert::CertHandlerFactory: Uses
 #+end_src
 #+results: classdiagram
 [[file:docs/images/classdiagram.png]]
