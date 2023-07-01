@@ -22,6 +22,13 @@ target_link_libraries(
   crypto_api
   GTest::gtest_main)
 
+add_test(
+  NAME test_crypto_api
+  COMMAND test_crypto_api)
+add_test(
+  NAME test_crypto_api
+  COMMAND /usr/bin/valgrind --error-exitcode=1 --leak-check=full --show-leak-kinds=all ${CMAKE_BINARY_DIR}/test/test_crypto_api)
+
 # Define test executable
 add_executable(
   test_certhandler
@@ -32,6 +39,13 @@ target_link_libraries(
   test_certhandler
   certhandler
   GTest::gtest_main)
+
+add_test(
+  NAME test_certhandler
+  COMMAND test_certhandler)
+add_test(
+  NAME test_certhandler
+  COMMAND /usr/bin/valgrind --error-exitcode=1 --leak-check=full --show-leak-kinds=all ${CMAKE_BINARY_DIR}/test/test_certhandler)
 
 
 include(GoogleTest)
