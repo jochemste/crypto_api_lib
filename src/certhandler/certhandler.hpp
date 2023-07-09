@@ -26,7 +26,15 @@ private:
 /// Interface for certificate handling class
 class ICertHandler {
 public:
-  virtual void get_ca_certificates(std::string &ca_certs);
+  virtual void get_ca_certificates(std::string &ca_certs) = 0;
+
+protected:
+private:
+};
+
+class CerthandlerFactory {
+public:
+  ICertHandler *create();
 
 protected:
 private:

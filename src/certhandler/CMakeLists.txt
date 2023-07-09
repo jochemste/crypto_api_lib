@@ -1,4 +1,5 @@
 set(SRCS
+  certhandler.cpp
   certhandlerlinux.cpp
   )
 
