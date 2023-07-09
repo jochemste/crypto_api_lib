@@ -33,10 +33,14 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
+#################
+# CRYPTO API TEST
+custom_add_test(crypto_api test_crypto_api)
+
 ##################
 # CERTHANDLER TEST
 custom_add_test(certhandler test_certhandler)
 
-#################
-# CRYPTO API TEST
-custom_add_test(crypto_api test_crypto_api)
+#######################
+# WEBSOCKETHANDLER TEST
+custom_add_test(websockethandler test_websockethandler)

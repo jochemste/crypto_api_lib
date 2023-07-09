@@ -1,7 +1,6 @@
 # Define source files
 set(SRCS
   crypto_api.cpp
-  websockethandler.cpp
   )
 
 # Define the library
@@ -26,6 +25,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(Boost)
 
 add_subdirectory(certhandler)
+add_subdirectory(websockethandler)
 
 if (BuildTest)
   target_link_libraries(
@@ -43,7 +43,9 @@ else()
 endif()
 
 # Make the library public
-target_include_directories(crypto_api PUBLIC
-    $<INSTALL_INTERFACE:include>
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
+target_include_directories(
+  crypto_api
+  PUBLIC
+  #$<INSTALL_INTERFACE:include>
+  #$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
 )
