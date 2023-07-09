@@ -1,11 +1,7 @@
 #ifndef CERTHANDLER_HPP
 #define CERTHANDLER_HPP
 
-#include <filesystem>
-#include <fstream>
 #include <string>
-
-namespace fs = std::filesystem;
 
 /// Namespace for certificate related classes, etc
 namespace Cert {
@@ -34,22 +30,6 @@ public:
 
 protected:
 private:
-};
-
-/// Implementation of ICertHandler for Linux systems
-class CertHandlerLinux : public ICertHandler {
-public:
-  ~CertHandlerLinux();
-  void get_ca_certificates(std::string &ca_certs);
-
-protected:
-  void open_file(const fs::path &file_path);
-  void read_file(std::string &output);
-  void close_file();
-
-private:
-  std::ifstream m_filestream;
-  const fs::path m_ca_cert_path = "/etc/ssl/certs/ca-certificates.crt";
 };
 
 } // namespace Cert
