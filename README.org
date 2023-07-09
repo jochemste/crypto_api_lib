@@ -73,17 +73,15 @@ Note that this library is currently under development and not ready to use.
 
           interface ICertHandler {
                   + get_ca_certificates(std::string&)
-                  + load_ca_certificates()
           }
 
           class CertHandlerLinux {
                   + get_ca_certificates(std::string&)
-                  + load_ca_certificates()
-                  - std::string filename
+                  - const std::filesystem::path m_ca_cert_path \n = "/etc/ssl/certs/ca-certificates.crt"
           }
 
           class CertHandlerFactory {
-                  + get_certhandler()
+                  + create()
           }
 
           CertHandlerLinux ..|> ICertHandler: Implements
